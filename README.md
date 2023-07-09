@@ -31,6 +31,19 @@ Start the server
   flask run
 ```
 
+## Run Docker Image
+
+
+
+```bash
+  docker pull abbashozefa/flask-crud:latest
+```
+
+Run Image
+
+```bash
+  docker run -p 5000:5000 abbashozefa/flask-crud
+
 
 ## Features
 
