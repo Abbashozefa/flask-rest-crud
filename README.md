@@ -34,7 +34,7 @@ Start the server
 ## Run Docker Image
 
 
-
+Pull Image
 ```bash
   docker pull abbashozefa/flask-crud:flask-api
 ```
