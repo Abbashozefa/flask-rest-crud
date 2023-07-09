@@ -72,10 +72,11 @@ class calltwo(Resource):
     def put(self,id):
         try:
             data=request.get_json()
+            
             old= coll.find({'_id':id})
             for x in old:
                 oldvalue=x
-                new = { "$set": {'name':data['name'],'email':data['email'],'password':data['password']}}
+                new = { "$set": data}
                 coll.update_one(oldvalue, new)
             
             
