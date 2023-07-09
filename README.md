@@ -31,9 +31,22 @@ Start the server
   flask run
 ```
 
+## Run Docker Image
+
+
+Pull Image
+```bash
+  docker pull abbashozefa/flask-crud:flask-api
+```
+
+Run Image
+
+```bash
+  docker run -p 5000:5000 abbashozefa/flask-crud
+```
 
 ## Features
-
+The API has the following endpoints:
 - GET /users - Returns a list of all users.
 - GET /users/id - Returns the user with the specified ID.
 - POST /users - Creates a new user with the specified data.
