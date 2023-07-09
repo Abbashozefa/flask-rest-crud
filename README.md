@@ -46,7 +46,7 @@ Run Image
 ```
 
 ## Features
-
+The API has the following endpoints:
 - GET /users - Returns a list of all users.
 - GET /users/id - Returns the user with the specified ID.
 - POST /users - Creates a new user with the specified data.
