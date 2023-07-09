@@ -6,6 +6,7 @@ import json
 import os
 from dotenv import load_dotenv
 load_dotenv()
+
 uri = os.getenv('MONGODB_URL')
 
 client = MongoClient(uri, server_api=ServerApi('1'))
@@ -15,7 +16,6 @@ db=client['Cluster0']
 coll=db['crud-api']
 
 app=Flask(__name__)
-
 
 api= Api(app)
 
