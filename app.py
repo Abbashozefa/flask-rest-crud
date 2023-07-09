@@ -22,11 +22,14 @@ class call(Resource):
         # ans=dict()
         # i=0
         ans=[]
-        for x in coll.find():
-            ans.append(json.dumps(x))
+        for data in coll.find():
+            ans.append({'_id':data['_id'],
+                        'name':data['name'],
+                        'email':data['email'],
+                        'password':data['password']})
             
           
-        return make_response(jsonify(json.dumps(ans,indent=0)))
+        return jsonify(json.loads(json.dumps(ans)))
 
 
     
@@ -36,59 +39,56 @@ class call(Resource):
         # name=input("name:")
         # email=input("email:")
         # password=input("password:")
-        data=request.get_json()
-        json={'_id':data['_id'],'name':data['name'],'email':data['email'],'password':data['password']}
-        coll.insert_one(json)
-        
+        try:
+            data=request.get_json()
+            json={'_id':data['_id'],'name':data['name'],'email':data['email'],'password':data['password']}
+            coll.insert_one(json)
+            return jsonify({"message":"Record Added"})
+        except:
+            return jsonify({"message":"Error"})
+
     
 
 class calltwo(Resource):
     def get(self,id):
-        ans=[]
-        for x in coll.find({'_id':id}):
-            ans.append(x)
+        
+        try:
+            
+            for data in coll.find({'_id':id}):
+                ans={'_id':data['_id'],'name':data['name'],'email':data['email'],'password':data['password']}
+            return jsonify(ans)
+        except:
+            return jsonify({"message":"id not found"})
+            
             
           
-        return json.dumps(ans,indent=0)
+        
         
     def delete(self,id):
-        json={'_id':id}
-        coll.delete_one(json)
-    def put(self,id):
+        try:
+            json={'_id':id}
+            coll.delete_one(json)
+            return jsonify({"message":"Record Deleted"})
+        except:
+            return jsonify({"message":"id not found"})
+            
         
-        name=input("name:")
-        email=input("email:")
-        password=input("password:")
-        old= coll.find({'_id':id})
-        new = { "$set": {'name':name,'email':email,'password':password} }
-        coll.update_one(old, new)
-
-#     def get(self,id):
-#         pass
-
-# class POST(Resource):
-#     def post(self):
-#         pass
-
-
-# class PUT(Resource):
-#     def delete(self):
-#         pass
-
-
-# class DELETE(Resource):
-#     def delete(self):
-#         pass
-
-
-
-
-
-
-
-
-
-
+    def put(self,id):
+        try:
+            data=request.get_json()
+            old= coll.find({'_id':id})
+            for x in old:
+                oldvalue=x
+                new = { "$set": {'name':data['name'],'email':data['email'],'password':data['password']}}
+                coll.update_one(oldvalue, new)
+            
+            
+            return jsonify({"message":"Updated"})
+        
+        except:
+            return jsonify({"message":"id not found"})
+        
+        
 
 api.add_resource(call,'/users')
 api.add_resource(calltwo,'/users/<int:id>')
