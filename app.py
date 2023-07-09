@@ -3,8 +3,10 @@ from flask_restful import Resource,Api
 from pymongo.server_api import ServerApi
 from pymongo.mongo_client import MongoClient
 import json
-
-uri = "mongodb+srv://Abbas:yellowyellow@cluster0.bqqrivd.mongodb.net/?retryWrites=true&w=majority"
+import os
+from dotenv import load_dotenv
+load_dotenv()
+uri = os.getenv('MONGODB_URL')
 
 client = MongoClient(uri, server_api=ServerApi('1'))
 
