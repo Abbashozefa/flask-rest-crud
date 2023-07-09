@@ -32,10 +32,7 @@ class call(Resource):
             return jsonify(json.loads(json.dumps(ans,indent=4)))
         except:
            return jsonify({"message":"No Records"})
-        
-
-
-    
+      
         
     def post(self):
         
@@ -60,10 +57,7 @@ class calltwo(Resource):
         except:
             return jsonify({"message":"id not found"})
             
-            
-          
-        
-        
+         
     def delete(self,id):
         try:
             json={'_id':id}
