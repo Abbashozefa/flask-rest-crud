@@ -19,26 +19,26 @@ api= Api(app)
 
 class call(Resource):
     def get(self):
-        # ans=dict()
-        # i=0
-        ans=[]
-        for data in coll.find():
-            ans.append({'_id':data['_id'],
-                        'name':data['name'],
-                        'email':data['email'],
-                        'password':data['password']})
-            
-          
-        return jsonify(json.loads(json.dumps(ans)))
+        
+        try:
+            ans=[]
+            for data in coll.find():
+                ans.append({'_id':data['_id'],
+                            'name':data['name'],
+                            'email':data['email'],
+                            'password':data['password']})
+                
+              
+            return jsonify(json.loads(json.dumps(ans,indent=4)))
+        except:
+           return jsonify({"message":"No Records"})
+        
 
 
     
         
     def post(self):
-        # id=int(input("id:"))
-        # name=input("name:")
-        # email=input("email:")
-        # password=input("password:")
+        
         try:
             data=request.get_json()
             json={'_id':data['_id'],'name':data['name'],'email':data['email'],'password':data['password']}
